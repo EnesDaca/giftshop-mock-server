@@ -3,11 +3,15 @@ import jsonServer from "json-server";
 import auth from "json-server-auth";
 
 const server = express();
+
 server.use((req, res, next) => {
-    res.header('Acces-Control-Allow-Origin', '*')
-    res.header('Acces-Control-Allow-Headers', '*')
-    next()
-})
+    res.header("Access-Control-Allow-Origin", "https://giftshop-ed.netlify.app");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Max-Age", "86400");
+    next();
+});
 
 const router = jsonServer.router('./data/db.json');
 server.use('/api', router);
